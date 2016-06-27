@@ -4,9 +4,11 @@
 
 require("component-responsive-frame/child");
 
+var dot = require("./lib/dot");
+var template = dot.compile(require("./_items.html"));
+
 var Tabletop = require("tabletop");
 
-console.log(Tabletop);
 
 var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1TxCIhCYx1XGiPAZZfysHDCUeQetez3hJq0M5dlh5oas/pubhtml';
 
@@ -21,21 +23,23 @@ var table = Tabletop.init({
     data.reverse();
     
     for (var i = 0; i < 10; i++) {
-    console.log(data[i].Title);
       
       articles.push({
         title: data[i].Title,
         url: data[i].URL,
         author: data[i].Developer,
-        section: data[i].Section,
+        category: data[i].Section,
         date: data[i].Published
       
       });
     
-      var node = document.createTextNode(data[i].Title);
-      title.appendChild(node);
-       console.log(articles);
-    }  
+//      var node = document.createTextNode(data[i].Title);
+//      title.appendChild(node);
+    }
+    
+    var html = template({ articles });
+    var section = document.querySelector(".content");
+    section.innerHTML = html;
   }
   
 });
