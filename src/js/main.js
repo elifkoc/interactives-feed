@@ -33,9 +33,15 @@ var table = Tabletop.init({
     }).sort((a, b) => b.date - a.date);
     
     var html = template({ articles: articles.slice(0, 10) });
-    var more = template({ articles: articles});
+    var archive = template({ articles: articles});
+    
     var section = document.querySelector(".content");
     section.innerHTML = html;
+
+    var more = document.querySelector(".more");
+    more.onclick = function() {
+      section.innerHTML = archive;
+    };
   }
   
 });
