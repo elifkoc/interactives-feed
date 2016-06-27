@@ -27,7 +27,8 @@ var table = Tabletop.init({
       
       return {
         title: article.Title,
-        date: published
+        date: published,
+        url: article.URL
       };
     
     }).sort((a, b) => b.date - a.date);
@@ -38,10 +39,14 @@ var table = Tabletop.init({
     var section = document.querySelector(".content");
     section.innerHTML = html;
 
+    //ADD event listener 
     var more = document.querySelector(".more");
-    more.onclick = function() {
-      section.innerHTML = archive;
-    };
+    more.addEventListener("click", function() {
+      while (more.firstChild) {
+        more.removeChild(more.firstChild);
+      }
+      section.innerHTML = archive;      
+    });
   }
   
 });
