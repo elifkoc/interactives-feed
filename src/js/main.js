@@ -7,6 +7,7 @@ require("component-responsive-frame/child");
 var dot = require("./lib/dot");
 var template = dot.compile(require("./_items.html"));
 
+var moment = require("moment");
 var Tabletop = require("tabletop");
 
 
@@ -19,25 +20,20 @@ var table = Tabletop.init({
   simpleSheet: true,
   callback: function(data, tabletop) {
     
-    //Reverses the data so the newest articles are loaded at top.
-    data.reverse();
-    
-    for (var i = 0; i < 10; i++) {
+    var articles = data.map(function(article) {
       
-      articles.push({
-        title: data[i].Title,
-        url: data[i].URL,
-        author: data[i].Developer,
-        category: data[i].Section,
-        date: data[i].Published
+      var [month, day, year] = article.Published.split("/");
+      var published = moment([year, month - 1, day]);
       
-      });
+      return {
+        title: article.Title,
+        date: published
+      };
     
-//      var node = document.createTextNode(data[i].Title);
-//      title.appendChild(node);
-    }
+    }).sort((a, b) => b.date - a.date);
     
-    var html = template({ articles });
+    var html = template({ articles: articles.slice(0, 10) });
+    var more = template({ articles: articles});
     var section = document.querySelector(".content");
     section.innerHTML = html;
   }

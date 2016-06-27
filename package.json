@@ -23,6 +23,7 @@
     "grunt-contrib-watch": "^1.0.0",
     "less": "^2.6.1",
     "mime": "^1.2.11",
+    "moment": "^2.13.0",
     "resolve": "^1.1.7",
     "shelljs": "^0.6.0",
     "tabletop": "^1.4.3",

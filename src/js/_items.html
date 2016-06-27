@@ -1,9 +1,13 @@
       
 <% data.articles.forEach(function(article) { %>
   <div class="section">
-    <div class="title"><a href="<%=article.url%>"><%=article.title%></a></div>
-    <div class="author"><%=article.author%></div>
-    <div class="category"><%=article.category%></div>
-    <div class="date"><%=article.date%></div>
+    <div class="date">
+      <%=article.date.format("MMM DD, YYYY")%>
+    </div>
+    <div class="title">
+      <a href="<%=article.url%>">
+        <%=article.title%>
+      </a>
+    </div>
   </div>
 <% }); %>
