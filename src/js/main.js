@@ -36,16 +36,16 @@ var table = Tabletop.init({
     var html = template({ articles: articles.slice(0, 10) });
     var archive = template({ articles: articles});
     
-    var section = document.querySelector(".content");
-    section.innerHTML = html;
+    var content = document.querySelector(".content");
+      content.insertAdjacentHTML('afterbegin', html);      
 
     //ADD event listener 
     var more = document.querySelector(".more");
     more.addEventListener("click", function() {
-      while (more.firstChild) {
-        more.removeChild(more.firstChild);
-      }
-      section.innerHTML = archive;      
+      content.innerHTML = archive;      
+      more.classList.add("more-hidden");
+
+      
     });
   }
   
